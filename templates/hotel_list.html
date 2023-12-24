@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% for hotel in hotel_list %}
+    
+       <h1> {{ hotel.hotel_name }}- {{  hotel.hotel_email}}- {{  hotel.id}}</h1>   
+       <form method="post" action= "{% url "deleteHotel" hotel.id %}" >
+        {% csrf_token %}
+            <input type="submit" value  = "Delete"  />
+       </form>
+
+    {% endfor %}
+    
+</body>
+</html>

@@ -1,0 +1,215 @@
+{% load static %}
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add Bootstrap CSS link below -->
+    <!-- Google Web Fonts -->
+    <!-- Preconnect to Google Fonts -->
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheets -->
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+     <!-- Customized Bootstrap Stylesheet -->
+     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Your custom CSS files go here -->
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Your common header, navigation, or other elements go here -->
+    
+    <!-- Header Start -->
+    <div class="container-fluid bg-dark px-0">
+        <div class="row gx-0">
+            <div class="col-lg-3 bg-dark d-none d-lg-block">
+                <a href="{% url 'home' %}" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                    <h1 class="m-0 text-primary text-uppercase">Hotel Maho</h1>
+                </a>
+            </div>
+            <div class="col-lg-9">
+                <div class="row gx-0 bg-white d-none d-lg-flex">
+                    <div class="col-lg-7 px-5 text-start">
+                        <div class="h-100 d-inline-flex align-items-center py-2 me-4">
+                            <i class="fa fa-envelope text-primary me-2"></i>
+                            <p class="mb-0">info@hotel.com</p>
+                        </div>
+                        <div class="h-100 d-inline-flex align-items-center py-2">
+                            <i class="fa fa-phone-alt text-primary me-2"></i>
+                            <p class="mb-0">+224 345 6789</p>
+                        </div>
+                    </div>
+                
+                    <div class="col-lg-5 px-5 text-end mr-4 mt-2">
+                        <div class="d-inline-flex align-items-center py-2 ">
+                           
+                               <!-- Add sign-in and sign-up elements -->
+                                {% if user.is_authenticated %}
+                                    <div class="d-inline-flex">
+                                        <p class="me-4">Welcome, {{ user.username }}!</p>
+                                        <a class="me-3 text-dark" href="{% url 'account_logout' %}">logout</a>
+                                    </div>
+                                {% else %}
+                                    <a class="me-3 text-dark" href="{% url 'account_login' %}">Sign In</a>
+                                    <a class="me-3 text-dark" href="{% url 'account_signup' %}">Sign Up</a>
+                                {% endif %}
+
+                               
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                    <a href="{% url 'home' %}" class="navbar-brand d-block d-lg-none">
+                        <h1 class="m-0 text-primary text-uppercase">Hotel Maho</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+                            <a href="{% url 'room_list' %}" class="nav-item nav-link active">Rooms</a>
+                            {% if user.is_authenticated %}
+                               <a href="{% url "mybooking" %}" class="nav-item nav-link">My Bookings</a>
+                            {% else %}
+                               {% comment %} <p>You are not sign in</p> {% endcomment %}
+                            {% endif %}
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            {% comment %} <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="booking.html" class="dropdown-item">Booking</a>
+                                    <a href="team.html" class="dropdown-item">Our Team</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                        <a href="{% url "Bookings" %}" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">book now<i class="fa fa-arrow-right ms-3"></i></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+   
+      {% block content %}{% endblock %}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    {% comment %} Footer {% endcomment %}
+   
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
+        <div class="container pb-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-primary rounded p-4" style="height: 200px; width: 250px;">
+                        <a href="/">
+                          <h1 class="text-white text-uppercase mb-3">Hotel Maho</h1>
+                        </a>
+                        <p class="text-white mb-0">
+                          <img class="img-thumbnail" src="{% static 'img/about-1.jpg' %}" style="width: 200px; max-height: 100px;">
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="section-title text-start text-primary text-uppercase mb-4">Contact</h6>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>6500 cote de liesse saint laurent</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+224 51 488 977</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@hotel.com</p>
+                 
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row gy-5 g-4">
+                        <div class="col-md-6">
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
+                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Contact Us</a>
+                            <a class="btn btn-link" href="">Privacy Policy</a>
+                            <a class="btn btn-link" href="">Terms & Condition</a>
+                            <a class="btn btn-link" href="">Support</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
+                            <a class="btn btn-link" href="">Food & Restaurant</a>
+                            <a class="btn btn-link" href="">Spa & Fitness</a>
+                            <a class="btn btn-link" href="">Sports & Gaming</a>
+                            <a class="btn btn-link" href="">Event & Party</a>
+                            <a class="btn btn-link" href="">GYM & Yoga</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+                        
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" href="/">Mahomy</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Add Bootstrap JS and Popper.js scripts at the end of the body -->
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+{% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
+
+    <!-- Your custom JS files go here -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
+</body>
+</html>

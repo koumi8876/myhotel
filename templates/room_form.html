@@ -1,0 +1,6 @@
+<h1>{% if room %}Edit Room{% else %}Create Room{% endif %}</h1>
+  <form method="post" class="room-form" action="{% url "room_create" %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if room %}Save changes{% else %}Create Room{% endif %}</button>
+  </form>
