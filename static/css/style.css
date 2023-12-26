@@ -4,7 +4,10 @@
     --light: #F1F8FF;
     --dark: #0F172B;
 }
-
+.button-end{
+    position: relative;
+    margin-left: 100px !important;
+}
 .fw-medium {
     font-weight: 500 !important;
 }

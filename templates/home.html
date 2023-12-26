@@ -41,8 +41,8 @@
                         <div class="p-3" style="max-width: 700px;">
                             <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">L'Art de Vivre Luxueux</h6>
                             <h1 class="display-3 text-white mb-4 animated slideInDown">Découvrez un Hôtel de Luxe Prestigieux</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+                            {% comment %} <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
+                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -66,44 +66,46 @@
     <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
             <div class="bg-white shadow" style="padding: 35px;">
-                <div class="row g-2">
-                    <form method="GET" action="{% url "search_room" %}">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest"> 
-                                        <input type="text"  name="roomName"/>
-                                    </div> 
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
-                                    </select>
+               <div class="container">
+                    <div class="row g-2">
+                        <form method="GET" action="{% url 'search_room' %}" class="row g-2 mx-auto justify-content-center">
+                            <div class="col-md-3">
+                                <div class="date" id="date1" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" placeholder="Check in"
+                                        data-target="#date1" data-toggle="datetimepicker" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Submit</button>
-                        </div>
-                    </form>
+                            <div class="col-md-3">
+                                <div class="date" id="date2" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" placeholder="Check out"
+                                        data-target="#date2" data-toggle="datetimepicker" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select">
+                                    <option selected>Room</option>
+                                    <option value="1">Single Room</option>
+                                    <option value="2">Double Room</option>
+                                    {% comment %} <option value="3">Adult 3</option> {% endcomment %}
+                                </select>
+                            </div>
+                            {% comment %} <div class="col-md-2">
+                                <select class="form-select">
+                                    <option selected>Child</option>
+                                    <option value="1">Child 1</option>
+                                    <option value="2">Child 2</option>
+                                    <option value="3">Child 3</option>
+                                </select>
+                            </div> {% endcomment %}
+                            <div class="col-md-2 button-end">
+                                <button class="btn btn-primary w-100">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+                
+                
             </div>
         </div>
     </div>
@@ -204,7 +206,7 @@
                                 <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${{room.roomPrice}}</small>
 
                                 <div style="float: right;">
-                                    <small class="start-0 top-100 translate-middle-y bg-danger text-white rounded py-1 px-3 ms-4">{{room.availability}}</small>
+                                    <small class="start-0 top-100 translate-middle-y bg-danger text-white rounded py-1 px-3 ms-4">{{room.roomStatus}}</small>
                                 </div>
                                 
 
@@ -227,7 +229,7 @@
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div> {% endcomment %}
 
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">{{roomDescription}}</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{% url 'Bookings' %}">Book Now</a>

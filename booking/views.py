@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 
-from booking.form import BookingForm
+from booking.models import Booking
+from .form import BookingForm
 
 
 # Create your views here.
@@ -18,15 +19,27 @@ def mybookings(request):
     context ={}
     return render(request,template_name,context)
 
-def create_bookings(request):
+def booking_create(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.save(using='hotel')
+            form.save()
             # Redirect to a success page or wherever you want to go
-            return redirect('success_page')
+            return redirect('booking_success')
+            
         # If form is not valid, you might want to handle it, e.g., display errors
     else:
         form = BookingForm()
 
-    return render(request, 'booking_form.html', {'form': form})
+    return render(request, 'bookings.html', {'form': form})
+
+# def booking_create(request):
+#     if request.method == 'POST':
+#         form = BookingForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('booking_success')  # Redirect to a success page
+#     else:
+#         form = BookingForm()
+
+#     return render(request, 'book_room.html', {'form': form})
