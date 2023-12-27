@@ -52,20 +52,19 @@
                                     <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            {% comment %} <div class="col-md-3">
                                 <select class="form-select">
                                     <option selected>Adult</option>
                                     <option value="1">Adult 1</option>
                                     <option value="2">Adult 2</option>
                                     <option value="3">Adult 3</option>
                                 </select>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="col-md-3">
                                 <select class="form-select">
-                                    <option selected>Child</option>
-                                    <option value="1">Child 1</option>
-                                    <option value="2">Child 2</option>
-                                    <option value="3">Child 3</option>
+                                    <option selected>Room</option>
+                                    <option value="1">Single Room</option>
+                                    <option value="2">Double Room</option>
                                 </select>
                             </div>
                         </div>
@@ -96,7 +95,7 @@
 
                                 <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${{room.roomPrice}}</small>
                                 <div style="float: right;">
-                                    <small class="start-0 top-100 translate-middle-y bg-danger text-white rounded py-1 px-3 ms-4">{{room.availability}}</small>
+                                    <small class="start-0 top-100 translate-middle-y bg-danger text-white rounded py-1 px-3 ms-4">{{room.roomStatus}}</small>
                                 </div>
                             </div>
                             <div class="p-4 mt-2">
@@ -117,7 +116,7 @@
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div> {% endcomment %}
 
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">{{room.roomDescription}}</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
