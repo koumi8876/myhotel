@@ -16,8 +16,8 @@ class Room(models.Model):
     # roomStatus = models.IntegerField(default=1)
     roomPrice = models.FloatField(default=0.0)
     
-    def __str__(self):
-        return self.room_number
+    # def __str__(self):
+    #     return self.room_number
     # def availability(self):
     #     if(self.roomStatus == 1):
     #         return "Available"
