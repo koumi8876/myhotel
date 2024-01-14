@@ -5,5 +5,5 @@ class RoomForm(forms.ModelForm):
     
     class Meta:
         model = Staff
-        fields = ['photo','position']
+        fields = ['name','photo','position']
     

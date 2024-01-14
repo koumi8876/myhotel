@@ -59,23 +59,24 @@
                 
                     <div class="col-lg-5 px-5 text-end mr-4 mt-2">
                         <div class="d-inline-flex align-items-center py-2 ">
-                           
-                               <!-- Add sign-in and sign-up elements -->
-                                {% if user.is_authenticated %}
-                                    <div class="d-inline-flex">
-                                        <p class="me-4">Welcome, {{ user.username }}!</p>
-                                        <a class="me-3 text-dark" href="{% url 'account_logout' %}">logout</a>
-                                    </div>
-                                {% else %}
-                                    <a class="me-3 text-dark" href="{% url 'account_login' %}">Sign In</a>
-                                    <a class="me-3 text-dark" href="{% url 'account_signup' %}">Sign Up</a>
-                                {% endif %}
-
-                               
-                        
+                            <!-- Add sign-in and sign-up elements -->
+                            {% if user.is_authenticated %}
+                                <div class="d-inline-flex">
+                                    <p class="me-4">Welcome, {{ user.username }}!</p>
+                                    <a class="me-3 text-dark" href="{% url 'account_logout' %}">logout</a>
+                                    <!-- Redirect admin user to the administration dashboard -->
+                                    {% if user.is_staff %}
+                                        <a class="me-3 text-dark" href="{% url 'admin:index' %}">Admin</a>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <a class="me-3 text-dark" href="{% url 'account_login' %}">Sign In</a>
+                                <a class="me-3 text-dark" href="{% url 'account_signup' %}">Sign Up</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+                
                 
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                     <a href="{% url 'home' %}" class="navbar-brand d-block d-lg-none">
@@ -115,17 +116,7 @@
    
       {% block content %}{% endblock %}
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+   
 
     {% comment %} Footer {% endcomment %}
    
@@ -206,6 +197,69 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
 
+ <!-- JavaScript Libraries -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+ <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+ <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+ <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+ <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+ <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+ <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+ <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+ <!-- Add this script in the head or before the closing body tag -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to filter rooms based on selected criteria and send data to Django
+            function filterRooms() {
+                var checkInDate = document.getElementById("date1").value;
+                var checkOutDate = document.getElementById("date2").value;
+                var selectedRoom = document.querySelector(".form-select").value;
+        
+                // Create an object with the data to be sent
+                var searchData = {
+                    check_in_date: checkInDate,
+                    check_out_date: checkOutDate,
+                    room_type: selectedRoom
+                };
+                console.log(searchData)
+        
+                // Use AJAX to send data to Django view
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "search_room" %}',  // Replace with your Django view URL
+                    data: JSON.stringify(searchData),
+                    contentType: 'application/json;charset=utf-8',
+                    success: function(response) {
+                        // Handle the response from the server (update UI, display results, etc.)
+                        console.log('Server response:', response);
+                        if (response) {
+                            // Redirect to another page
+                            window.location.href = '{% url "room_list" %}';
+                        } else {
+                            // Handle other cases as needed
+                            console.error('Server response indicates failure:', response);
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        
+            // Attach event listener to the form submission
+            var form = document.querySelector("form");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+        
+                // Call the filterRooms function when the form is submitted
+                filterRooms();
+            });
+        });
+    </script>
+    
     <!-- Your custom JS files go here -->
     {% block extra_js %}{% endblock %}
 </body>

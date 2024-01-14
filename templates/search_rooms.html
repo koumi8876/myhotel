@@ -1,6 +1,19 @@
-<h2>Available Rooms</h2>
-<ul>
-    {% for room in available_rooms %}
-        <li>{{ room.room_number }}</li>
-    {% endfor %}
-</ul>
+{% comment %} {% extends "base.html" %}
+{% load static %}
+
+<!-- search_room.html -->
+
+
+    <h1>Available Rooms</h1>
+    {% if available_rooms %}
+        <ul>
+            {% for room in available_rooms %}
+                <li>{{ room.roomNumber }} - {{ room.roomType }} - {{ room.roomStatus }} - {{ room.roomPrice }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No available rooms found.</p>
+    {% endif %}
+
+
+  {% endcomment %}
